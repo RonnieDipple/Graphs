@@ -13,33 +13,85 @@ class Graph:
         """
         Add a vertex to the graph.
         """
-        pass  # TODO
+        self.vertices[vertex_id] = set()
 
     def add_edge(self, v1, v2):
         """
         Add a directed edge to the graph.
         """
-        pass  # TODO
+        if v1 in self.vertices and v2 in self.vertices:
+            self.vertices[v1].add(v2)
+        else:
+            raise Exception("Vertex does not exist")
 
     def get_neighbors(self, vertex_id):
         """
         Get all neighbors (edges) of a vertex.
         """
-        pass  # TODO
+        if vertex_id in self.vertices:
+            return self.vertices[vertex_id]
+        else:
+            raise Exception("Vertex does not exist")
 
     def bft(self, starting_vertex):
         """
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        # This algorithm should be used and memorized
+        # Queue is FIFO
+        # Create a queue
+        q = Queue()
+        # Enqueue the starting vertex
+        q.enqueue(starting_vertex)#enqueue placing starting_vertex at the front of the que so it is the first out
+        # Create a set to store visited vertices
+        visited = set()
+
+        # While the queue is not empty....
+        while q.size() > 0:
+            # Dequeue the first vertex
+            v = q.dequeue()
+
+            # Check if it has been visited
+            # If it has not been visited..
+            if v not in visited:
+
+                # Mark it as visited
+                print(v)
+                visited.add(v)
+                # Enqueue all of it's neighbors
+                for neighbor in self.get_neighbors(v):
+                    q.enqueue(neighbor)
+
 
     def dft(self, starting_vertex):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        # This algorithm should be used and memorized
+        # Stack is Filo
+        # Create a stack
+        s = Stack()
+        # Push the starting vertex
+        s.push(starting_vertex)
+        # Create a set to store visited vertices
+        visited = set()
+
+        # While the stack is not empty....
+        while s.size() > 0:
+            # Pop the first vertex
+            v = s.pop()
+
+            # Check if it has been visited
+            # If it has not been visited.....
+            if v not in visited:
+                # Mark it as visited
+                print(v)
+                visited.add(v)
+                # Push all of it's neighbors on to the stack
+                for neighbor in self.get_neighbors(v):
+                    s.push(neighbor)
 
     def dft_recursive(self, starting_vertex):
         """
@@ -48,7 +100,8 @@ class Graph:
 
         This should be done using recursion.
         """
-        pass  # TODO
+
+
 
     def bfs(self, starting_vertex, destination_vertex):
         """
