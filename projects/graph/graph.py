@@ -93,7 +93,7 @@ class Graph:
                 for neighbor in self.get_neighbors(v):
                     s.push(neighbor)
 
-    def dft_recursive(self, starting_vertex, visited=[]):
+    def dft_recursive(self, starting_vertex):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
@@ -119,7 +119,7 @@ class Graph:
                 visited.add(v)
                 # Call dft_recursive on each neighbor
                 for neighbor in self.get_neighbors(v):
-                    self.dfs_recursive(s.push(neighbor))
+                    self.dft_recursive(s.push(neighbor))
 
 
     def bfs(self, starting_vertex, destination_vertex):
@@ -128,22 +128,15 @@ class Graph:
         starting_vertex to destination_vertex in
         breath-first order.
         """
-        # This algorithm should be used and memorized
-        # Create a queue
-        # Enqueue A PATH TO the starting vertex
-        # Create a set to store visited vertices
-        # While the queue is not empty....
-            # Dequeue the first PATH
-            # GRAB VERTEX FROM THE END OF THE PATH
-            # Check if it has been visited
-            # If it has not been visited.....
-                # Mark it as visited
-                # CHECK IF IT IS THE TARGET
-                    #IF IT IS THEN RETURN THE PATH
-                # Enqueue A PATH TO all of it's neighbors
-                # MAKE A COPY OF THE PATH
-                # ENQUEUE THE COPY
-        pass  # TODO
+        queue = [(starting_vertex, [starting_vertex])]
+        while queue:
+            (vertex, path) = queue.pop(0)
+            for next in self.get_neighbors(vertex) - set(path):
+                if next == destination_vertex:
+                    return path + [next]
+                else:
+                    queue.append((next, path + [next]))
+
 
     def dfs(self, starting_vertex, destination_vertex):
         """
@@ -151,7 +144,7 @@ class Graph:
         starting_vertex to destination_vertex in
         depth-first order.
         """
-        pass  # TODO
+
 
     def dfs_recursive(self, starting_vertex):
         """
@@ -216,13 +209,13 @@ if __name__ == '__main__':
         1, 2, 4, 6, 3, 5, 7
     '''
     #graph.dft(1)
-    graph.dft_recursive(1)
+    #graph.dft_recursive(1)
 
     '''
     Valid BFS path:
         [1, 2, 4, 6]
     '''
-    #print(graph.bfs(1, 6))
+    print(graph.bfs(1, 6))
 
     '''
     Valid DFS paths:
