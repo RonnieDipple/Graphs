@@ -1,3 +1,9 @@
+import random
+
+# Nodes are users
+# Edges are friendships
+# Graph is cyclic undirected
+
 class User:
     def __init__(self, name):
         self.name = name
@@ -42,23 +48,66 @@ class SocialGraph:
         self.last_id = 0
         self.users = {}
         self.friendships = {}
-        # !!!! IMPLEMENT ME
+        # !!!! IMPLEMENTED BY ME
 
         # Add users
+        # Write a for loop that calls create user the right amount of times
+        for i in range(num_users):
+            self.add_user(f"User {i+1}")
 
         # Create friendships
+        # To create N random friendships,
+        # you could create a list with all possible friendship combinations,
+        # shuffle the list, then grab the first N elements from the list.
+        possible_friendships = []
+        for user_id in self.users:
+            for friend_id in range(user_id + 1, self.last_id + 1):
+                possible_friendships.append((user_id, friend_id))
+                #fisher-yates shuffle, random algo
+        random.shuffle(possible_friendships)
+        print(possible_friendships)
+
+        # Create n friendships where n = avg_friendships * num_users // 2
+        # avg_friendships = total_friendships / num_users
+        # total_friendships = avg_friendships * num_users
+        for i in range(num_users * avg_friendships // 2):
+            friendship =possible_friendships[i]
+            self.add_friendship(friendship[0], friendship[1])
+
 
     def get_all_social_paths(self, user_id):
         """
         Takes a user's user_id as an argument
-
         Returns a dictionary containing every user in that user's
         extended network with the shortest friendship path between them.
-
         The key is the friend's ID and the value is the path.
         """
         visited = {}  # Note that this is a dictionary, not a set
-        # !!!! IMPLEMENT ME
+
+        # This queue is actually a list
+        queue = [[user_id]]
+
+        # While there's still an queue
+        while len(queue) > 0:
+
+            # Set the path equal to the list at index 0 and remove the list.
+            path = queue.pop(0)
+
+            # The current node that's getting worked on is the last node from the path.
+            current_id = path[-1]
+
+            # If the node hasn't been visited yet, set up the corresponding key and value pair.
+            if current_id not in visited:
+                visited[current_id] = path
+
+                # Append the friend to the queue if they are friends.
+                for friend in self.friendships[current_id]:
+                    queue.append([*path, friend])
+
+            # If the node has already been visited, ignore it.
+            else:
+                pass
+
         return visited
 
 
