@@ -1,6 +1,7 @@
 
 from room import Room
 from player import Player
+from traverse_the_map import traverse_map_bfs
 from world import World
 
 import random
@@ -36,7 +37,8 @@ player = Player(world.starting_room)
 # Fill this out with directions to walk
 # traversal_path = ['n', 'n']
 
-# traversal_path = []
+traversal_path = traverse_map_bfs(player)
+
 #
 # directions = {'n': 's', 's': 'n', 'e': 'w', 'w': 'e'}
 # path = []
