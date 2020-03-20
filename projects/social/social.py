@@ -94,14 +94,14 @@ class SocialGraph:
             path = queue.pop(0)
 
             # The current node that's getting worked on is the last node from the path.
-            node = path[-1]
+            current_id = path[-1]
 
             # If the node hasn't been visited yet, set up the corresponding key and value pair.
-            if node not in visited:
-                visited[node] = path
+            if current_id not in visited:
+                visited[current_id] = path
 
                 # Append the friend to the queue if they are friends.
-                for friend in self.friendships[node]:
+                for friend in self.friendships[current_id]:
                     queue.append([*path, friend])
 
             # If the node has already been visited, ignore it.

@@ -58,7 +58,7 @@ Similar to sets, checking if something is in a dictionary runs in O(1) time. If 
 ## 3. Questions
 
 1. To create 100 users with an average of 10 friends each, how many times would you need to call `add_friendship()`? Why?
-500 times. This is because 100 friends x 10 = 1000. Since friends are mutual, divide by 2 to get 500.
+500 times. This is because 100 friends x 10 = 1000. add_friendship() creates 2 friendships, divide by 2 to get 500.
 
 2. If you create 1000 users with an average of 5 random friends each, 
 what percentage of other users will be in a particular user's extended social network? 

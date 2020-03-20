@@ -1,9 +1,17 @@
+
 from room import Room
 from player import Player
 from world import World
 
 import random
 from ast import literal_eval
+#
+# Open `adv.py`. There are four parts to the provided code:
+#
+# * World generation code. Do not modify this!
+# * An incomplete list of directions. Your task is to fill this with valid traversal directions.
+# * Test code. Run the tests by typing `python3 adv.py` in your terminal.
+# * REPL code. You can uncomment this and run `python3 adv.py` to walk around the map.
 
 # Load world
 world = World()
@@ -27,9 +35,35 @@ player = Player(world.starting_room)
 
 # Fill this out with directions to walk
 # traversal_path = ['n', 'n']
-traversal_path = []
 
-
+# traversal_path = []
+#
+# directions = {'n': 's', 's': 'n', 'e': 'w', 'w': 'e'}
+# path = []
+# rooms_visited = {}
+#
+# rooms_visited[player.current_room.id] = player.current_room.get_exits()
+#
+# while len(rooms_visited) < len(room_graph) - 1:
+#
+#     if player.current_room.id not in rooms_visited:
+#         rooms_visited[player.current_room.id] = player.current_room.get_exits()
+#         random.shuffle(rooms_visited[player.current_room.id])
+#         last_direction = path[-1]
+#         rooms_visited[player.current_room.id].remove(last_direction)
+#
+#     while len(rooms_visited[player.current_room.id]) < 1:
+#         last_direction = path.pop()
+#         traversal_path.append(last_direction)
+#         player.travel(last_direction)
+#
+#     move_direction = rooms_visited[player.current_room.id].pop(0)
+#     traversal_path.append(move_direction)
+#     path.append(directions[move_direction])
+#     player.travel(move_direction)
+#
+#     print('path', path)
+#     print(f"traversal {traversal_path}")
 
 # TRAVERSAL TEST
 visited_rooms = set()
